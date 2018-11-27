@@ -1,4 +1,4 @@
-namespace SimpleToDo.WebApp.Models.View
+namespace SimpleToDo.Models.View
 {
     public class ErrorViewModel
     {

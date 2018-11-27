@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleToDo.WebApp.Models.View;
+using SimpleToDo.Models.View;
 using System.Diagnostics;
 
 namespace SimpleToDo.WebApp.Controllers

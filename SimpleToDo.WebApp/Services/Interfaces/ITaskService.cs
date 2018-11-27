@@ -1,5 +1,5 @@
 ﻿using SimpleToDo.Models.Domain;
-using SimpleToDo.WebApp.Models.View;
+using SimpleToDo.Models.View;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
