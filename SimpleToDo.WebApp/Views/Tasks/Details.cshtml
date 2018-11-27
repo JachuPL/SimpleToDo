@@ -1,4 +1,4 @@
-﻿@model TaskDetailsViewModel
+@model TaskDetailsViewModel
 
 <h2>Szczegóły zadania '@Model.Title'</h2>
 
@@ -37,12 +37,30 @@
         </dd>
     </dl>
 </div>
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteTaskModalLabel">Czy na pewno chcesz usunąć zadanie '@Model.Title'?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Wybrano opcję, która prowadzi do nieodwracalnej operacji usunięcia zadania '@Model.Title'. Po usunięciu zadania jego przywrócenie będzie niemożliwe. Czy chcesz kontynuować?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                <form method="post" asp-action="Delete">
+                    <input type="hidden" name="id" value="@Model.Id"/>
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="deleteTaskModal">Usuń</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
-    <form method="post" asp-action="Delete">
-        <a asp-action="Index" class="btn btn-light mr-2">Powrót do listy zadań</a>
-        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-light mr-2" })
-
-        <input type="hidden" name="id" value="@Model.Id" />
-        <button type="submit" class="btn btn-danger">Usuń</button>
-    </form>
+    <a asp-action="Index" class="btn btn-light mr-2">Powrót do listy zadań</a>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-light mr-2" })
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTaskModal">Usuń</button>
 </div>
