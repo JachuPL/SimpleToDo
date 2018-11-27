@@ -1,6 +1,10 @@
 ﻿@using SimpleToDo.WebApp.Controllers
 @model List<TaskIndexViewModel>
 
+<div class="pad-bottom">
+    <a asp-action="Create" class="btn btn-success">Nowe zadanie</a>
+</div>
+
 <table class="table">
     <thead class="thead-default">
         <tr>
@@ -17,7 +21,7 @@
                 <td>@task.Title</td>
                 <td>@task.Finished</td>
                 <td>@task.DueDate</td>
-                <td>@Html.ActionLink("Szczegóły", nameof(TasksController.Details), new { id = task.Id }, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Szczegóły", nameof(TasksController.Details), new { id = task.Id }, new { @class = "btn btn-light" })</td>
             </tr>
         }
     </tbody>

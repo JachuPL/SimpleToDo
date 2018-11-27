@@ -34,3 +34,8 @@ body {
         display: none;
     }
 }
+
+.pad-bottom {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
