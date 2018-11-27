@@ -1,4 +1,4 @@
-﻿using SimpleToDo.WebApp.Models.Domain;
+﻿using SimpleToDo.Models.Domain;
 using SimpleToDo.WebApp.Models.View;
 using System;
 using System.Collections.Generic;

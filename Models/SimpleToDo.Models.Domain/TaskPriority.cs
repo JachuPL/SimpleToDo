@@ -1,4 +1,4 @@
-﻿namespace SimpleToDo.WebApp.Models.Domain
+﻿namespace SimpleToDo.Models.Domain
 {
     public enum TaskPriority
     {
