@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Models\SimpleToDo.Models.Domain\SimpleToDo.Models.Domain.csproj" />
+    <ProjectReference Include="..\Models\SimpleToDo.Models.View\SimpleToDo.Models.View.csproj" />
+    <ProjectReference Include="..\SimpleToDo.Services\SimpleToDo.Services.csproj" />
+  </ItemGroup>
+
 </Project>

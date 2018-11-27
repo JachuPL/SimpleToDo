@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleToDo.WebApp.Models.Domain
+namespace SimpleToDo.Models.Domain
 {
     public class ToDoTask
     {

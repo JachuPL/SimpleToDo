@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SimpleToDo.WebApp.Services;
-using SimpleToDo.WebApp.Services.Interfaces;
+using SimpleToDo.Services;
+using SimpleToDo.Services.Interfaces;
 
 namespace SimpleToDo.WebApp
 {

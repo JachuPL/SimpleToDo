@@ -1,11 +1,11 @@
-﻿using SimpleToDo.WebApp.Models.Domain;
-using SimpleToDo.WebApp.Models.View;
-using SimpleToDo.WebApp.Services.Interfaces;
+﻿using SimpleToDo.Models.Domain;
+using SimpleToDo.Models.View;
+using SimpleToDo.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SimpleToDo.WebApp.Services
+namespace SimpleToDo.Services
 {
     public class TaskService : ITaskService
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleToDo.WebApp.Models.Domain;
-using SimpleToDo.WebApp.Models.View;
-using SimpleToDo.WebApp.Services.Interfaces;
+using SimpleToDo.Models.Domain;
+using SimpleToDo.Models.View;
+using SimpleToDo.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

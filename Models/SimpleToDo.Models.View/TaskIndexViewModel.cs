@@ -1,7 +1,7 @@
-﻿using SimpleToDo.WebApp.Models.Domain;
+﻿using SimpleToDo.Models.Domain;
 using System;
 
-namespace SimpleToDo.WebApp.Models.View
+namespace SimpleToDo.Models.View
 {
     public class TaskIndexViewModel
     {

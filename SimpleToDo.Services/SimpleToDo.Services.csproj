@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Models\SimpleToDo.Models.Domain\SimpleToDo.Models.Domain.csproj" />
+    <ProjectReference Include="..\Models\SimpleToDo.Models.View\SimpleToDo.Models.View.csproj" />
+  </ItemGroup>
+
+</Project>
