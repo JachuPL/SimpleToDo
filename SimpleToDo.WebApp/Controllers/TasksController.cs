@@ -73,7 +73,7 @@ namespace SimpleToDo.WebApp.Controllers
             return View(model);
         }
 
-        //POST: Task/Edit/{id:guid}
+        // POST: Task/Edit/{id:guid}
         [HttpPost]
         public async Task<IActionResult> Edit(Guid? id, EditTaskViewModel model)
         {
@@ -88,6 +88,18 @@ namespace SimpleToDo.WebApp.Controllers
                 return RedirectToAction(nameof(Index));
 
             return RedirectToAction(nameof(Details), new { id = task.Id });
+        }
+
+        // POST: Task/Delete/{id:guid}
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid? id)
+        {
+            if (!id.HasValue)
+                return RedirectToAction(nameof(Index));
+
+            await _taskService.Delete(id.Value);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -15,5 +15,7 @@ namespace SimpleToDo.WebApp.Services.Interfaces
         Task<ToDoTask> Create(CreateTaskViewModel toDoTask);
 
         Task<ToDoTask> Update(Guid id, EditTaskViewModel model);
+
+        Task Delete(Guid id);
     }
 }
