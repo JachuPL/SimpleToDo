@@ -1,6 +1,6 @@
 ﻿@using SimpleToDo.WebApp.Controllers
 @using SimpleToDo.WebApp.Models.Domain
-@model List<SimpleToDo.WebApp.Models.Domain.ToDoTask>
+@model List<SimpleToDo.WebApp.Models.View.TaskIndexViewModel>
 
 <h2>Lista zadań</h2>
 <table>
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (ToDoTask task in Model)
+        @foreach (TaskIndexViewModel task in Model)
         {
             <tr>
                 <td>@task.Title</td>
