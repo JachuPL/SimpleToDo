@@ -1,4 +1,5 @@
 ﻿using SimpleToDo.WebApp.Models.Domain;
+using SimpleToDo.WebApp.Models.View;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,5 +11,7 @@ namespace SimpleToDo.WebApp.Services.Interfaces
         Task<List<ToDoTask>> GetPage(int page, int tasksPerPage);
 
         Task<ToDoTask> Get(Guid id);
+
+        Task<ToDoTask> Create(CreateTaskViewModel toDoTask);
     }
 }
