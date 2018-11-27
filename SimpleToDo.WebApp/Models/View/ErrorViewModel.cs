@@ -1,6 +1,4 @@
-using System;
-
-namespace SimpleToDo.WebApp.Models
+namespace SimpleToDo.WebApp.Models.View
 {
     public class ErrorViewModel
     {
