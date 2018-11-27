@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleToDo.WebApp.Models.Domain;
 using SimpleToDo.WebApp.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,6 +21,16 @@ namespace SimpleToDo.WebApp.Controllers
         {
             List<ToDoTask> tasks = await _taskService.GetPage(page, tasksPerPage);
             return View(tasks);
+        }
+
+        // GET: Tasks/{id:guid}
+        public async Task<IActionResult> Details(Guid id)
+        {
+            ToDoTask task = await _taskService.Get(id);
+            if (task is null)
+                return RedirectToAction(nameof(Index));
+
+            return View(task);
         }
     }
 }
