@@ -1,4 +1,14 @@
 ﻿@model EditTaskViewModel
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#taskDueDate').datetimepicker({
+                format: 'DD.MM.YYYY HH:mm:ss',
+                locale: 'pl'
+            });
+        });
+    </script>
+}
 
 <h2>Edycja zadania '@Model.Title'</h2>
 
@@ -17,9 +27,14 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" id="taskDueDate">
                 <label asp-for="DueDate" class="col-form-label"></label>
-                <input asp-for="DueDate" class="form-control" />
+                <div class="input-group date" id="dueDatePicker" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#dueDatePicker" asp-for="DueDate" />
+                    <div class="input-group-append" data-target="#dueDatePicker" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group row">
