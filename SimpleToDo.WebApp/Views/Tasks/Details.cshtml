@@ -40,4 +40,8 @@
 <div>
     @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Powrót do listy zadań</a>
+    <form method="post" asp-action="Delete">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <button type="submit" class="btn btn-danger">Usuń</button>
+    </form>
 </div>

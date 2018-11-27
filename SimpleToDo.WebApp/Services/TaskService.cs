@@ -40,6 +40,11 @@ namespace SimpleToDo.WebApp.Services
             return Task.FromResult(CreateMockObject());
         }
 
+        public Task Delete(Guid id)
+        {
+            return Task.CompletedTask;
+        }
+
         private ToDoTask CreateMockObject()
         {
             Random r = new Random();
