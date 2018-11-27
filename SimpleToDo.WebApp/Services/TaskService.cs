@@ -1,4 +1,4 @@
-using SimpleToDo.WebApp.Models.Domain;
+﻿using SimpleToDo.WebApp.Models.Domain;
 using SimpleToDo.WebApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,11 +20,22 @@ namespace SimpleToDo.WebApp.Services
             Random r = new Random();
             int max = r.Next(10, 20);
             for (int i = 0; i < max; i++)
-                mockList.Add(
-                    new ToDoTask(Guid.NewGuid().ToString(),
-                                string.Empty,
-                                DateTime.Now.AddDays(r.Next(1, 5)),
-                                (TaskPriority)r.Next(0, 2)));
+                mockList.Add(CreateMockObject());
+        }
+
+        public Task<ToDoTask> Get(Guid id)
+        {
+            Random r = new Random();
+            return Task.FromResult(CreateMockObject());
+        }
+
+        private ToDoTask CreateMockObject()
+        {
+            Random r = new Random();
+            return new ToDoTask(Guid.NewGuid().ToString(),
+                string.Empty,
+                DateTime.Now.AddDays(r.Next(1, 5)),
+                (TaskPriority)r.Next(0, 2));
         }
     }
 }
