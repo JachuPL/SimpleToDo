@@ -1,4 +1,4 @@
-﻿@model CreateTaskViewModel
+@model CreateTaskViewModel
 
 <h2>Tworzenie zadania</h2>
 
@@ -23,11 +23,9 @@
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <div class="form-check">
-                    <label>
-                        <input asp-for="Finished" /> @Html.DisplayNameFor(model => model.Finished)
-                    </label>
-                </div>
+                <label>
+                    @Html.DisplayNameFor(model => model.Finished) <input asp-for="Finished" data-toggle="toggle" value="true" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                </label>
             </div>
             <div class="form-group row">
                 <label asp-for="Priority" class="col-form-label"></label>

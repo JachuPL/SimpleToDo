@@ -31,15 +31,6 @@
       ]
     },
     {
-      "library": "eonasdan-bootstrap-datetimepicker@4.17.47",
-      "destination": "wwwroot/lib/eonasdan-bootstrap-datetimepicker/",
-      "files": [
-        "js/bootstrap-datetimepicker.min.js",
-        "css/bootstrap-datetimepicker.min.css",
-        "css/bootstrap-datetimepicker.css"
-      ]
-    },
-    {
       "library": "bootstrap-toggle@2.2.2",
       "destination": "wwwroot/lib/bootstrap-toggle/",
       "files": [
