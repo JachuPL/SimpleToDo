@@ -13,5 +13,7 @@ namespace SimpleToDo.WebApp.Services.Interfaces
         Task<ToDoTask> Get(Guid id);
 
         Task<ToDoTask> Create(CreateTaskViewModel toDoTask);
+
+        Task<ToDoTask> Update(Guid id, EditTaskViewModel model);
     }
 }

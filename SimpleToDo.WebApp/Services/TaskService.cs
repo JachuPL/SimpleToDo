@@ -35,6 +35,11 @@ namespace SimpleToDo.WebApp.Services
             return Task.FromResult(CreateMockObject());
         }
 
+        public Task<ToDoTask> Update(Guid id, EditTaskViewModel model)
+        {
+            return Task.FromResult(CreateMockObject());
+        }
+
         private ToDoTask CreateMockObject()
         {
             Random r = new Random();
