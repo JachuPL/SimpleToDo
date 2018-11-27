@@ -5,7 +5,7 @@
 <table>
     <thead>
         <tr>
-            <th>Zadanie</th>
+            <th>Tytuł</th>
             <th>Status</th>
             <th>Przewidywana data zakończenia</th>
         </tr>
@@ -14,9 +14,9 @@
         @foreach (ToDoTask task in Model)
         {
             <tr>
-                <td>Nazwa zadania</td>
-                <td>@Convert.ToBoolean(new Random().Next(0, 1))</td>
-                <td>@(DateTime.Now + TimeSpan.FromDays(new Random().Next(1, 7)))</td>
+                <td>@task.Title</td>
+                <td>@task.Finished</td>
+                <td>@task.DueDate</td>
             </tr>
         }
     </tbody>
