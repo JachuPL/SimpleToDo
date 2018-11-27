@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SimpleToDo.WebApp.Services.Interfaces
+namespace SimpleToDo.Services.Interfaces
 {
     public interface ITaskService
     {

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{D03CFE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleToDo.Models.View", "Models\SimpleToDo.Models.View\SimpleToDo.Models.View.csproj", "{75F7AECE-4FD1-49CB-BE45-293F496F9655}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleToDo.Services", "SimpleToDo.Services\SimpleToDo.Services.csproj", "{9EC21838-386F-4861-AABB-7BB0A7C690B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{75F7AECE-4FD1-49CB-BE45-293F496F9655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75F7AECE-4FD1-49CB-BE45-293F496F9655}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75F7AECE-4FD1-49CB-BE45-293F496F9655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC21838-386F-4861-AABB-7BB0A7C690B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC21838-386F-4861-AABB-7BB0A7C690B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC21838-386F-4861-AABB-7BB0A7C690B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC21838-386F-4861-AABB-7BB0A7C690B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
