@@ -1,4 +1,5 @@
 ﻿using SimpleToDo.WebApp.Models.Domain;
+using SimpleToDo.WebApp.Models.View;
 using SimpleToDo.WebApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace SimpleToDo.WebApp.Services
         public Task<ToDoTask> Get(Guid id)
         {
             Random r = new Random();
+            return Task.FromResult(CreateMockObject());
+        }
+
+        public Task<ToDoTask> Create(CreateTaskViewModel toDoTask)
+        {
             return Task.FromResult(CreateMockObject());
         }
 

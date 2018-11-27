@@ -4,6 +4,7 @@ using SimpleToDo.WebApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SimpleToDo.WebApp.Models.View;
 
 namespace SimpleToDo.WebApp.Controllers
 {
@@ -31,6 +32,23 @@ namespace SimpleToDo.WebApp.Controllers
                 return RedirectToAction(nameof(Index));
 
             return View(task);
+        }
+
+        // GET: Task/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Task/Create
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateTaskViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            ToDoTask newTask = await _taskService.Create(viewModel);
+            return RedirectToAction(nameof(Details), new { id = newTask.Id });
         }
     }
 }
