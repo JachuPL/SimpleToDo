@@ -29,6 +29,31 @@
         "jquery.validate.unobtrusive.min.js",
         "jquery.validate.unobtrusive.js"
       ]
+    },
+    {
+      "library": "eonasdan-bootstrap-datetimepicker@4.17.47",
+      "destination": "wwwroot/lib/eonasdan-bootstrap-datetimepicker/",
+      "files": [
+        "js/bootstrap-datetimepicker.min.js",
+        "css/bootstrap-datetimepicker.min.css",
+        "css/bootstrap-datetimepicker.css"
+      ]
+    },
+    {
+      "library": "bootstrap-toggle@2.2.2",
+      "destination": "wwwroot/lib/bootstrap-toggle/",
+      "files": [
+        "css/bootstrap-toggle.css",
+        "css/bootstrap-toggle.min.css",
+        "css/bootstrap2-toggle.css",
+        "css/bootstrap2-toggle.min.css",
+        "js/bootstrap-toggle.js",
+        "js/bootstrap-toggle.min.js",
+        "js/bootstrap-toggle.min.js.map",
+        "js/bootstrap2-toggle.js",
+        "js/bootstrap2-toggle.min.js",
+        "js/bootstrap2-toggle.min.js.map"
+      ]
     }
   ]
 }
