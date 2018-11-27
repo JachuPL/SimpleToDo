@@ -19,7 +19,9 @@
         {
             <tr>
                 <td>@task.Title</td>
-                <td>@task.Finished</td>
+                <td>
+                    <input type="checkbox" disabled data-toggle="toggle" value="@task.Finished" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                </td>
                 <td>@task.DueDate</td>
                 <td>@Html.ActionLink("Szczegóły", nameof(TasksController.Details), new { id = task.Id }, new { @class = "btn btn-light" })</td>
             </tr>

@@ -1,4 +1,4 @@
-@model TaskDetailsViewModel
+﻿@model TaskDetailsViewModel
 
 <h2>Szczegóły zadania '@Model.Title'</h2>
 
@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Finished)
         </dt>
         <dd class="col-10">
-            @Html.DisplayFor(model => model.Finished)
+            <input type="checkbox" disabled asp-for="Finished" data-toggle="toggle" value="@Model.Finished" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
         </dd>
         <dt class="col-2">
             @Html.DisplayNameFor(model => model.Priority)
