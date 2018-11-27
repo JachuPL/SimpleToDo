@@ -44,7 +44,20 @@ namespace SimpleToDo.WebApp.Controllers
             if (task is null)
                 return RedirectToAction(nameof(Index));
 
-            return View(task);
+            return View(ToDetailsViewModel(task));
+        }
+
+        private TaskDetailsViewModel ToDetailsViewModel(ToDoTask task)
+        {
+            return new TaskDetailsViewModel()
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Finished = task.Finished,
+                Priority = task.Priority,
+                DueDate = task.DueDate,
+                Description = task.Description
+            };
         }
 
         // GET: Task/Create
