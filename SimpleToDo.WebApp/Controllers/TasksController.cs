@@ -21,7 +21,20 @@ namespace SimpleToDo.WebApp.Controllers
         public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]int tasksPerPage = 20)
         {
             List<ToDoTask> tasks = await _taskService.GetPage(page, tasksPerPage);
-            return View(tasks);
+            List<TaskIndexViewModel> taskIndex = new List<TaskIndexViewModel>();
+            tasks.ForEach(task =>
+            {
+                TaskIndexViewModel model = new TaskIndexViewModel
+                {
+                    Id = task.Id,
+                    Finished = task.Finished,
+                    Priority = task.Priority,
+                    Title = task.Title,
+                    DueDate = task.DueDate
+                };
+                taskIndex.Add(model);
+            });
+            return View(taskIndex);
         }
 
         // GET: Tasks/{id:guid}
