@@ -69,5 +69,10 @@ namespace SimpleToDo.Services
             _ctx.Tasks.Remove(task);
             await _ctx.SaveChangesAsync();
         }
+
+        public async Task<List<ToDoTask>> FindMatchingTitlesOrDescriptions(string criteria)
+        {
+            return await _ctx.Tasks.Where(x => x.Title.Contains(criteria) || x.Description.Contains(criteria)).ToListAsync();
+        }
     }
 }
