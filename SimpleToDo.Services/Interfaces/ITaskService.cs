@@ -3,12 +3,13 @@ using SimpleToDo.Models.View;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SimpleToDo.Services.Interfaces
 {
     public interface ITaskService
     {
-        Task<List<ToDoTask>> GetPage(int page, int tasksPerPage);
+        Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage);
 
         Task<ToDoTask> Get(Guid id);
 

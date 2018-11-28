@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SimpleToDo.Services
 {
@@ -19,13 +20,12 @@ namespace SimpleToDo.Services
             _ctx = context;
         }
 
-        public Task<List<ToDoTask>> GetPage(int page, int tasksPerPage)
+        public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage)
         {
             return _ctx.Tasks
                 .OrderBy(x => x.Finished)
                 .ThenByDescending(x => x.Priority)
-                .Skip((page - 1) * tasksPerPage).Take(tasksPerPage)
-                .ToListAsync();
+                .ToPagedListAsync(page, tasksPerPage);
         }
 
         public async Task<ToDoTask> Get(Guid id)
