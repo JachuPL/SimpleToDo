@@ -17,5 +17,7 @@ namespace SimpleToDo.Services.Interfaces
         Task<ToDoTask> Update(Guid id, EditTaskViewModel model);
 
         Task Delete(Guid id);
+
+        Task<List<ToDoTask>> FindMatchingTitlesOrDescriptions(string criteria);
     }
 }

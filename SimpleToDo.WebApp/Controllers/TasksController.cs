@@ -60,13 +60,13 @@ namespace SimpleToDo.WebApp.Controllers
             };
         }
 
-        // GET: Task/Create
+        // GET: Tasks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Task/Create
+        // POST: Tasks/Create
         [HttpPost]
         public async Task<IActionResult> Create(CreateTaskViewModel viewModel)
         {
@@ -77,7 +77,7 @@ namespace SimpleToDo.WebApp.Controllers
             return RedirectToAction(nameof(Details), new { id = newTask.Id });
         }
 
-        // GET: Task/Edit/{id:guid}
+        // GET: Tasks/Edit/{id:guid}
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (!id.HasValue)
@@ -99,7 +99,7 @@ namespace SimpleToDo.WebApp.Controllers
             return View(model);
         }
 
-        // POST: Task/Edit/{id:guid}
+        // POST: Tasks/Edit/{id:guid}
         [HttpPost]
         public async Task<IActionResult> Edit(Guid? id, EditTaskViewModel model)
         {
@@ -116,7 +116,7 @@ namespace SimpleToDo.WebApp.Controllers
             return RedirectToAction(nameof(Details), new { id = task.Id });
         }
 
-        // POST: Task/Delete/{id:guid}
+        // POST: Tasks/Delete/{id:guid}
         [HttpPost]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -126,6 +126,42 @@ namespace SimpleToDo.WebApp.Controllers
             await _taskService.Delete(id.Value);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Tasks/Search
+        public IActionResult Search()
+        {
+            return View(new SearchResultsViewModel());
+        }
+
+        // POST: Tasks/Search
+        [HttpPost]
+        public async Task<IActionResult> Search(SearchCriteriaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(new SearchResultsViewModel());
+
+            model.Phrase = model.Phrase.Trim();
+            List<ToDoTask> results = await _taskService.FindMatchingTitlesOrDescriptions(model.Phrase);
+            List<TaskIndexViewModel> taskIndex = new List<TaskIndexViewModel>();
+            results.ForEach(task =>
+            {
+                TaskIndexViewModel indexModel = new TaskIndexViewModel
+                {
+                    Id = task.Id,
+                    Finished = task.Finished,
+                    Priority = task.Priority,
+                    Title = task.Title,
+                    DueDate = task.DueDate
+                };
+                taskIndex.Add(indexModel);
+            });
+            SearchResultsViewModel resultsModel = new SearchResultsViewModel()
+            {
+                Phrase = model.Phrase,
+                Results = taskIndex
+            };
+            return View(nameof(Search), resultsModel);
         }
     }
 }
