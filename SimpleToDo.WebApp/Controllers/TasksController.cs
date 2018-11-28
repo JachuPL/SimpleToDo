@@ -1,40 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SimpleToDo.Models.Domain;
 using SimpleToDo.Models.View;
 using SimpleToDo.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SimpleToDo.WebApp.Controllers
 {
     public class TasksController : Controller
     {
         private readonly ITaskService _taskService;
+        private readonly IMapper _mapper;
 
-        public TasksController(ITaskService taskService)
+        public TasksController(ITaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
         }
 
-        // GET: Tasks?page=1&tasksPerPage=20
-        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]int tasksPerPage = 20)
+        // GET: Tasks?page=1
+        public async Task<IActionResult> Index([FromQuery]int page = 1)
         {
-            List<ToDoTask> tasks = await _taskService.GetPage(page, tasksPerPage);
-            List<TaskIndexViewModel> taskIndex = new List<TaskIndexViewModel>();
-            tasks.ForEach(task =>
-            {
-                TaskIndexViewModel model = new TaskIndexViewModel
-                {
-                    Id = task.Id,
-                    Finished = task.Finished,
-                    Priority = task.Priority,
-                    Title = task.Title,
-                    DueDate = task.DueDate
-                };
-                taskIndex.Add(model);
-            });
-            return View(taskIndex);
+            IPagedList<ToDoTask> tasks = await _taskService.GetPage(page, 10);
+            return View(ToMappedPagedList<ToDoTask, TaskIndexViewModel>(tasks));
+        }
+
+        private IPagedList<TDestination> ToMappedPagedList<TSource, TDestination>(IPagedList<TSource> list)
+        {
+            IEnumerable<TDestination> sourceList = _mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(list);
+            IPagedList<TDestination> pagedResult = new StaticPagedList<TDestination>(sourceList, list.GetMetaData());
+            return pagedResult;
         }
 
         // GET: Tasks/{id:guid}
@@ -44,20 +42,7 @@ namespace SimpleToDo.WebApp.Controllers
             if (task is null)
                 return RedirectToAction(nameof(Index));
 
-            return View(ToDetailsViewModel(task));
-        }
-
-        private TaskDetailsViewModel ToDetailsViewModel(ToDoTask task)
-        {
-            return new TaskDetailsViewModel()
-            {
-                Id = task.Id,
-                Title = task.Title,
-                Finished = task.Finished,
-                Priority = task.Priority,
-                DueDate = task.DueDate,
-                Description = task.Description
-            };
+            return View(_mapper.Map<TaskDetailsViewModel>(task));
         }
 
         // GET: Tasks/Create
@@ -73,7 +58,7 @@ namespace SimpleToDo.WebApp.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            ToDoTask newTask = await _taskService.Create(viewModel);
+            ToDoTask newTask = await _taskService.Create(_mapper.Map<ToDoTask>(viewModel));
             return RedirectToAction(nameof(Details), new { id = newTask.Id });
         }
 
@@ -87,16 +72,7 @@ namespace SimpleToDo.WebApp.Controllers
             if (task is null)
                 return RedirectToAction(nameof(Index));
 
-            EditTaskViewModel model = new EditTaskViewModel
-            {
-                Title = task.Title,
-                Description = task.Description,
-                DueDate = task.DueDate,
-                Priority = task.Priority,
-                Finished = task.Finished
-            };
-
-            return View(model);
+            return View(_mapper.Map<EditTaskViewModel>(task));
         }
 
         // POST: Tasks/Edit/{id:guid}
@@ -142,24 +118,12 @@ namespace SimpleToDo.WebApp.Controllers
                 return View(new SearchResultsViewModel());
 
             model.Phrase = model.Phrase.Trim();
-            List<ToDoTask> results = await _taskService.FindMatchingTitlesOrDescriptions(model.Phrase);
-            List<TaskIndexViewModel> taskIndex = new List<TaskIndexViewModel>();
-            results.ForEach(task =>
-            {
-                TaskIndexViewModel indexModel = new TaskIndexViewModel
-                {
-                    Id = task.Id,
-                    Finished = task.Finished,
-                    Priority = task.Priority,
-                    Title = task.Title,
-                    DueDate = task.DueDate
-                };
-                taskIndex.Add(indexModel);
-            });
+            List<ToDoTask> searchResults = await _taskService.FindMatchingTitlesOrDescriptions(model.Phrase);
+
             SearchResultsViewModel resultsModel = new SearchResultsViewModel()
             {
                 Phrase = model.Phrase,
-                Results = taskIndex
+                Results = _mapper.Map<List<TaskIndexViewModel>>(searchResults)
             };
             return View(nameof(Search), resultsModel);
         }

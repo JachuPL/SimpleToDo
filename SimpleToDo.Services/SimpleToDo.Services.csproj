@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="X.PagedList" Version="7.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Models\SimpleToDo.Models.Domain\SimpleToDo.Models.Domain.csproj" />
     <ProjectReference Include="..\Models\SimpleToDo.Models.View\SimpleToDo.Models.View.csproj" />
     <ProjectReference Include="..\SimpleToDo.Database\SimpleToDo.Database.csproj" />

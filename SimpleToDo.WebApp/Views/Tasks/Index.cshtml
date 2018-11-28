@@ -1,5 +1,7 @@
 ﻿@using SimpleToDo.WebApp.Controllers
-@model List<TaskIndexViewModel>
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<TaskIndexViewModel>
 
 <div class="pad-bottom">
     <a asp-action="Create" class="btn btn-success">
@@ -37,3 +39,10 @@
         }
     </tbody>
 </table>
+<br />
+@Html.PagedListPager(Model, page => Url.Action(nameof(TasksController.Index), new { page }), new PagedListRenderOptionsBase
+{
+    ContainerDivClasses = new[] { "navigation" },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+})

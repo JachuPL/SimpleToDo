@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SimpleToDo.Services
 {
@@ -19,13 +20,12 @@ namespace SimpleToDo.Services
             _ctx = context;
         }
 
-        public Task<List<ToDoTask>> GetPage(int page, int tasksPerPage)
+        public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage)
         {
             return _ctx.Tasks
                 .OrderBy(x => x.Finished)
                 .ThenByDescending(x => x.Priority)
-                .Skip((page - 1) * tasksPerPage).Take(tasksPerPage)
-                .ToListAsync();
+                .ToPagedListAsync(page, tasksPerPage);
         }
 
         public async Task<ToDoTask> Get(Guid id)
@@ -33,14 +33,11 @@ namespace SimpleToDo.Services
             return await _ctx.Tasks.FindAsync(id);
         }
 
-        public async Task<ToDoTask> Create(CreateTaskViewModel toDoTask)
+        public async Task<ToDoTask> Create(ToDoTask toDoTask)
         {
-            ToDoTask task = new ToDoTask(toDoTask.Title, toDoTask.Description, toDoTask.DueDate, toDoTask.Priority);
-            task.Finished = toDoTask.Finished;
-
-            task = _ctx.Tasks.Add(task).Entity;
+            toDoTask = _ctx.Tasks.Add(toDoTask).Entity;
             await _ctx.SaveChangesAsync();
-            return task;
+            return toDoTask;
         }
 
         public async Task<ToDoTask> Update(Guid id, EditTaskViewModel model)

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleToDo.AutoMapper;
 using SimpleToDo.Database;
 using SimpleToDo.Models.View.Validators;
 using SimpleToDo.Services;
@@ -48,6 +49,7 @@ namespace SimpleToDo.WebApp
         private void ConfigureDependencyInjectionContainer(IServiceCollection services)
         {
             services.AddTransient<ITaskService, TaskService>();
+            AutoMapperConfiguration.RegisterMappings(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
