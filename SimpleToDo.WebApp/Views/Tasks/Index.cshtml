@@ -19,10 +19,10 @@
     <tbody>
         @foreach (TaskIndexViewModel task in Model)
         {
-            <tr>
+            <tr class="@task.GetClassByPriority()">
                 <td class="text-center">@task.Title</td>
                 <td class="text-center">
-                    <input type="checkbox" disabled data-toggle="toggle" value="@task.Finished" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                    <input @(task.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
                 </td>
                 <td class="text-center">@task.DueDate</td>
                 <td class="text-center">

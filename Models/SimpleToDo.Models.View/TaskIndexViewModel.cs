@@ -21,5 +21,21 @@ namespace SimpleToDo.Models.View
         [Display(Name = "Priorytet")]
         // TODO: check if after mapping sort order is lost, if so then leave this field intact
         public TaskPriority Priority { get; set; }
+
+        public string GetClassByPriority()
+        {
+            switch (Priority)
+            {
+                case TaskPriority.Normal:
+                    return "table-default";
+
+                case TaskPriority.High:
+                    return "table-warning";
+
+                case TaskPriority.Critical:
+                default:
+                    return "table-danger";
+            }
+        }
     }
 }
