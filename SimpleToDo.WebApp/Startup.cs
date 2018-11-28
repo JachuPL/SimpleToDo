@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleToDo.Services;
 using SimpleToDo.Services.Interfaces;
+using SimpleToDo.WebApp.Binders;
 
 namespace SimpleToDo.WebApp
 {
@@ -30,7 +31,10 @@ namespace SimpleToDo.WebApp
 
             ConfigureDependencyInjectionContainer(services);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());  // replace default model binder
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         private void ConfigureDependencyInjectionContainer(IServiceCollection services)

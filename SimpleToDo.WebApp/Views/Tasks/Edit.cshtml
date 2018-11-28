@@ -1,47 +1,60 @@
 ﻿@model EditTaskViewModel
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#dueDatePicker').datetimepicker({
+                format: 'DD.MM.YYYY HH:mm:00',
+                sideBySide: true
+            });
+        });
+    </script>
+}
 
 <h2>Edycja zadania '@Model.Title'</h2>
 
 <hr />
-<div class="row">
+<div class="form-row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+            <div class="form-group row">
+                <label asp-for="Title" class="col-form-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+            <div class="form-group row">
+                <label asp-for="Description" class="col-form-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DueDate" class="control-label"></label>
-                <input asp-for="DueDate" class="form-control" />
+            <div class="form-group row" id="taskDueDate">
+                <label asp-for="DueDate" class="col-form-label"></label>
+                <div class="input-group date" id="dueDatePicker" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#dueDatePicker" asp-for="DueDate" />
+                    <div class="input-group-append" data-target="#dueDatePicker" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Finished" /> @Html.DisplayNameFor(model => model.Finished)
-                    </label>
-                </div>
+            <div class="form-group row">
+                <label>
+                    @Html.DisplayNameFor(model => model.Finished) <input asp-for="Finished" data-toggle="toggle" value="true" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                </label>
             </div>
-            <div class="form-group">
-                <label asp-for="Priority" class="control-label"></label>
-                <input asp-for="Priority" class="form-control" />
+            <div class="form-group row">
+                <label asp-for="Priority" class="col-form-label"></label>
+                <select asp-for="Priority" asp-items="Html.GetEnumSelectList<TaskPriority>()" class="form-control"></select>
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+            <div class="form-group row">
+                <a asp-action="Index" class="btn btn-light mr-2">
+                    <span class="fa fa-chevron-left"></span>&nbsp;Powrót do listy
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <span class="fa fa-pen-alt"></span>&nbsp;Zapisz
+                </button>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Powrót do listy</a>
-</div>
-
