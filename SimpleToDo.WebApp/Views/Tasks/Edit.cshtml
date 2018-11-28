@@ -4,7 +4,8 @@
         $(function () {
             $('#dueDatePicker').datetimepicker({
                 format: 'DD.MM.YYYY HH:mm:00',
-                sideBySide: true
+                sideBySide: true,
+                date: '@Model.DueDate'
             });
         });
     </script>
