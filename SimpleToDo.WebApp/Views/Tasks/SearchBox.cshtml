@@ -1,7 +1,8 @@
 ﻿@model SearchCriteriaViewModel
 
 <div>
-    <form asp-action="Search">
+    <form asp-action="Search" method="post">
+        @Html.AntiForgeryToken()
         <div class="input-group">
             <input type="text" asp-for="Phrase" class="form-control" />
             <div class="input-group-append">
