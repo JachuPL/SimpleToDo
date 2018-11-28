@@ -1,41 +1,27 @@
 ﻿@model TaskDetailsViewModel
 
-<h2>Szczegóły zadania '@Model.Title'</h2>
+<h2>@Model.Title</h2>
 
 <div>
-    <hr />
-    <dl class="row">
-        <dt class="col-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-2">
-            @Html.DisplayNameFor(model => model.DueDate)
-        </dt>
-        <dd class="col-10">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="checkbox" disabled asp-for="Finished" data-toggle="toggle" value="@Model.Finished" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" data-offstyle="primary" />
+        </div>
+        <div class="col-md-2">
             @Html.DisplayFor(model => model.DueDate)
-        </dd>
-        <dt class="col-2">
-            @Html.DisplayNameFor(model => model.Finished)
-        </dt>
-        <dd class="col-10">
-            <input type="checkbox" disabled asp-for="Finished" data-toggle="toggle" value="@Model.Finished" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
-        </dd>
-        <dt class="col-2">
-            @Html.DisplayNameFor(model => model.Priority)
-        </dt>
-        <dd class="col-10">
+        </div>
+        <div class="col-md-2">
             @Html.DisplayFor(model => model.Priority)
-        </dd>
-    </dl>
+        </div>
+    </div>
+    <p>
+        @Html.DisplayFor(model => model.Description)
+    </p>
+    <div>
+        <a asp-action="Index" class="btn btn-light mr-2">Powrót do listy zadań</a>
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-light mr-2" })
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTaskModal">Usuń</button>
+    </div>
 </div>
 <div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -52,15 +38,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
                 <form method="post" asp-action="Delete">
-                    <input type="hidden" name="id" value="@Model.Id"/>
+                    <input type="hidden" name="id" value="@Model.Id" />
                     <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="deleteTaskModal">Usuń</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
-<div>
-    <a asp-action="Index" class="btn btn-light mr-2">Powrót do listy zadań</a>
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-light mr-2" })
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTaskModal">Usuń</button>
 </div>
