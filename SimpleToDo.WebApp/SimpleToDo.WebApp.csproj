@@ -17,4 +17,10 @@
     <ProjectReference Include="..\SimpleToDo.Services\SimpleToDo.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Tasks\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,41 @@
+﻿@using SimpleToDo.WebApp.Controllers
+@model SearchResultsViewModel
+
+@await Html.PartialAsync("SearchBox", new SearchCriteriaViewModel())
+
+@if (Model.Results.Any())
+{
+    <h4>Wyniki wyszukiwania dla frazy '@Model.Phrase'</h4>
+    <br/>
+    <table class="table">
+        <thead class="thead-default">
+            <tr>
+                <th class="text-center">Tytuł</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Przewidywana data zakończenia</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TaskIndexViewModel task in Model.Results)
+            {
+                <tr class="@task.GetClassByPriority()">
+                    <td class="text-center">@task.Title</td>
+                    <td class="text-center">
+                        <input @(task.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                    </td>
+                    <td class="text-center">@task.DueDate</td>
+                    <td class="text-center">
+                        <a href="@Url.Action(nameof(TasksController.Details), "Tasks", new {id = task.Id})" class="btn btn-light">
+                            <span class="fa fa-info"></span>&nbsp;Szczegóły
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Wpisz szukaną frazę w pole tekstowe i następnie kliknij lupę, by wyszukać ją w tytułach i opisach zadań.</p>
+}
