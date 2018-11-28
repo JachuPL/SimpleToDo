@@ -5,6 +5,7 @@ using SimpleToDo.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SimpleToDo.WebApp.Controllers
 {
@@ -18,23 +19,10 @@ namespace SimpleToDo.WebApp.Controllers
         }
 
         // GET: Tasks?page=1&tasksPerPage=20
-        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]int tasksPerPage = 20)
+        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]int tasksPerPage = 10)
         {
-            List<ToDoTask> tasks = await _taskService.GetPage(page, tasksPerPage);
-            List<TaskIndexViewModel> taskIndex = new List<TaskIndexViewModel>();
-            tasks.ForEach(task =>
-            {
-                TaskIndexViewModel model = new TaskIndexViewModel
-                {
-                    Id = task.Id,
-                    Finished = task.Finished,
-                    Priority = task.Priority,
-                    Title = task.Title,
-                    DueDate = task.DueDate
-                };
-                taskIndex.Add(model);
-            });
-            return View(taskIndex);
+            IPagedList<ToDoTask> tasks = await _taskService.GetPage(page, tasksPerPage);
+            return View(tasks);
         }
 
         // GET: Tasks/{id:guid}
