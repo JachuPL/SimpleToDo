@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleToDo.Models.View.Validators;
 using SimpleToDo.Services;
 using SimpleToDo.Services.Interfaces;
 using SimpleToDo.WebApp.Binders;
@@ -34,7 +36,8 @@ namespace SimpleToDo.WebApp
             services.AddMvc(options =>
             {
                 options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());  // replace default model binder
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CreateTaskViewModelValidator>());
         }
 
         private void ConfigureDependencyInjectionContainer(IServiceCollection services)
