@@ -22,8 +22,8 @@ namespace SimpleToDo.Services
         public Task<List<ToDoTask>> GetPage(int page, int tasksPerPage)
         {
             return _ctx.Tasks
-                .OrderByDescending(x => x.Priority)
-                .ThenBy(x => x.Finished)
+                .OrderBy(x => x.Finished)
+                .ThenByDescending(x => x.Priority)
                 .Skip((page - 1) * tasksPerPage).Take(tasksPerPage)
                 .ToListAsync();
         }
