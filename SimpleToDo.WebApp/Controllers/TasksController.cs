@@ -53,6 +53,7 @@ namespace SimpleToDo.WebApp.Controllers
 
         // POST: Tasks/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateTaskViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -77,6 +78,7 @@ namespace SimpleToDo.WebApp.Controllers
 
         // POST: Tasks/Edit/{id:guid}
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid? id, EditTaskViewModel model)
         {
             if (!id.HasValue)
@@ -94,6 +96,7 @@ namespace SimpleToDo.WebApp.Controllers
 
         // POST: Tasks/Delete/{id:guid}
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (!id.HasValue)
@@ -112,6 +115,7 @@ namespace SimpleToDo.WebApp.Controllers
 
         // POST: Tasks/Search
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search(SearchCriteriaViewModel model)
         {
             if (!ModelState.IsValid)
