@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SimpleToDo.Database;
 using SimpleToDo.Models.View.Validators;
 using SimpleToDo.Services;
 using SimpleToDo.Services.Interfaces;
@@ -32,6 +34,9 @@ namespace SimpleToDo.WebApp
             });
 
             ConfigureDependencyInjectionContainer(services);
+            services.AddDbContext<ToDoContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc(options =>
             {

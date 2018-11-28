@@ -1,57 +1,73 @@
-﻿using SimpleToDo.Models.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleToDo.Database;
+using SimpleToDo.Models.Domain;
 using SimpleToDo.Models.View;
 using SimpleToDo.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleToDo.Services
 {
     public class TaskService : ITaskService
     {
+        private readonly ToDoContext _ctx;
+
+        public TaskService(ToDoContext context)
+        {
+            _ctx = context;
+        }
+
         public Task<List<ToDoTask>> GetPage(int page, int tasksPerPage)
         {
-            List<ToDoTask> mockList = new List<ToDoTask>();
-            FillWithSomeObjects(mockList);
-            return Task.FromResult(mockList);
+            return _ctx.Tasks
+                .OrderByDescending(x => x.Priority)
+                .ThenBy(x => x.Finished)
+                .Skip((page - 1) * tasksPerPage).Take(tasksPerPage)
+                .ToListAsync();
         }
 
-        private void FillWithSomeObjects(List<ToDoTask> mockList)
+        public async Task<ToDoTask> Get(Guid id)
         {
-            Random r = new Random();
-            int max = r.Next(10, 20);
-            for (int i = 0; i < max; i++)
-                mockList.Add(CreateMockObject());
+            return await _ctx.Tasks.FindAsync(id);
         }
 
-        public Task<ToDoTask> Get(Guid id)
+        public async Task<ToDoTask> Create(CreateTaskViewModel toDoTask)
         {
-            Random r = new Random();
-            return Task.FromResult(CreateMockObject());
+            ToDoTask task = new ToDoTask(toDoTask.Title, toDoTask.Description, toDoTask.DueDate, toDoTask.Priority);
+            task.Finished = toDoTask.Finished;
+
+            task = _ctx.Tasks.Add(task).Entity;
+            await _ctx.SaveChangesAsync();
+            return task;
         }
 
-        public Task<ToDoTask> Create(CreateTaskViewModel toDoTask)
+        public async Task<ToDoTask> Update(Guid id, EditTaskViewModel model)
         {
-            return Task.FromResult(CreateMockObject());
+            ToDoTask task = await Get(id);
+            if (task is null)
+                return null;
+
+            task.Title = model.Title;
+            task.Description = model.Description;
+            task.Finished = model.Finished;
+            task.DueDate = model.DueDate;
+            task.Priority = model.Priority;
+
+            _ctx.Tasks.Update(task);
+            await _ctx.SaveChangesAsync();
+            return task;
         }
 
-        public Task<ToDoTask> Update(Guid id, EditTaskViewModel model)
+        public async Task Delete(Guid id)
         {
-            return Task.FromResult(CreateMockObject());
-        }
+            ToDoTask task = await Get(id);
+            if (task is null)
+                return;
 
-        public Task Delete(Guid id)
-        {
-            return Task.CompletedTask;
-        }
-
-        private ToDoTask CreateMockObject()
-        {
-            Random r = new Random();
-            return new ToDoTask(Guid.NewGuid().ToString(),
-                string.Empty,
-                DateTime.Now.AddDays(r.Next(1, 5)),
-                (TaskPriority)r.Next(0, 2));
+            _ctx.Tasks.Remove(task);
+            await _ctx.SaveChangesAsync();
         }
     }
 }
