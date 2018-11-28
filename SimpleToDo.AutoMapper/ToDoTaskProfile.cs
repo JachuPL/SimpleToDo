@@ -11,6 +11,8 @@ namespace SimpleToDo.AutoMapper
             CreateMap<ToDoTask, TaskIndexViewModel>();
             CreateMap<ToDoTask, TaskDetailsViewModel>();
             CreateMap<EditTaskViewModel, ToDoTask>();
+            CreateMap<CreateTaskViewModel, ToDoTask>()
+                .ForMember(x => x.Id, o => o.Ignore());
         }
     }
 }

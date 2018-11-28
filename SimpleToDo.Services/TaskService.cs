@@ -33,14 +33,11 @@ namespace SimpleToDo.Services
             return await _ctx.Tasks.FindAsync(id);
         }
 
-        public async Task<ToDoTask> Create(CreateTaskViewModel toDoTask)
+        public async Task<ToDoTask> Create(ToDoTask toDoTask)
         {
-            ToDoTask task = new ToDoTask(toDoTask.Title, toDoTask.Description, toDoTask.DueDate, toDoTask.Priority);
-            task.Finished = toDoTask.Finished;
-
-            task = _ctx.Tasks.Add(task).Entity;
+            toDoTask = _ctx.Tasks.Add(toDoTask).Entity;
             await _ctx.SaveChangesAsync();
-            return task;
+            return toDoTask;
         }
 
         public async Task<ToDoTask> Update(Guid id, EditTaskViewModel model)

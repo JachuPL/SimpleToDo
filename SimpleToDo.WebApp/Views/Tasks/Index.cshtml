@@ -1,7 +1,7 @@
 ﻿@using SimpleToDo.WebApp.Controllers
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<ToDoTask>
+@model X.PagedList.IPagedList<TaskIndexViewModel>
 
 <div class="pad-bottom">
     <a asp-action="Create" class="btn btn-success">
@@ -22,10 +22,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (ToDoTask task in Model)
+        @foreach (TaskIndexViewModel task in Model)
         {
-            <!--<tr class="task.GetClassByPriority()">-->
-            <tr>
+            <tr class="@task.GetClassByPriority()">
                 <td class="text-center">@task.Title</td>
                 <td class="text-center">
                     <input @(task.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
