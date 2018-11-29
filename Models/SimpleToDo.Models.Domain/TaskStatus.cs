@@ -5,9 +5,9 @@ namespace SimpleToDo.Models.Domain
     public enum TaskStatus
     {
         [Display(Name = "Nieukończone")]
-        Unfinished,
+        Unfinished = 0,
 
         [Display(Name = "Ukończone")]
-        Finished
+        Finished = 1
     }
 }

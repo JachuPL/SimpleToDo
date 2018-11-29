@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using SimpleToDo.Models.Domain;
 using SimpleToDo.Models.View;
 
@@ -8,7 +8,7 @@ namespace SimpleToDo.AutoMapper
     {
         public ToDoTaskProfile()
         {
-            CreateMap<ToDoTask, TaskIndexViewModel>();
+            CreateMap<ToDoTask, TaskListElementViewModel>();
             CreateMap<ToDoTask, TaskDetailsViewModel>();
             CreateMap<EditTaskViewModel, ToDoTask>();
             CreateMap<CreateTaskViewModel, ToDoTask>()

@@ -25,7 +25,7 @@ namespace SimpleToDo.Services
             IQueryable<ToDoTask> query = _ctx.Tasks;
 
             if (filteredStatus != FilteredTaskStatus.All)
-                query = query.Where(x => (int)x.Status == (int)filteredStatus);
+                query = query.Where(x => x.Status == filteredStatus.ToTaskStatus());
 
             return query.OrderBy(x => x.Status)
                 .ThenByDescending(x => x.Priority)

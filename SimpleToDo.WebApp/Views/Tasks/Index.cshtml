@@ -12,7 +12,7 @@
         <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
     </a>
     <form asp-route-page="@Model.Tasks.PageNumber" method="post">
-        <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<TaskStatus>()" class="form-control"></select>
+        <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<FilteredTaskStatus>()" class="form-control"></select>
         <button type="submit">
             Filtruj
         </button>
