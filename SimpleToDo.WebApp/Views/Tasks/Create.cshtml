@@ -3,9 +3,12 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
+            var dateNow = new Date();
+            dateNow.setSeconds(0);
             $('#dueDatePicker').datetimepicker({
                 format: 'DD.MM.YYYY HH:mm:00',
-                sideBySide: true
+                sideBySide: true,
+                date: dateNow
             });
         });
     </script>
