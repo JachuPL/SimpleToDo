@@ -99,10 +99,12 @@ namespace SimpleToDo.WebApp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            ToDoTask task = await _taskService.Update(id.Value, model);
+            ToDoTask task = await _taskService.Get(id.Value);
             if (task is null)
                 return RedirectToAction(nameof(Index));
 
+            _mapper.Map(model, task);
+            task = await _taskService.Update(task);
             return RedirectToAction(nameof(Details), new { id = task.Id });
         }
 
