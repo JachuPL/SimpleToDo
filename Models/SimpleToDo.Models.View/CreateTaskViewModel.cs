@@ -16,7 +16,7 @@ namespace SimpleToDo.Models.View
         public DateTime DueDate { get; set; }
 
         [Display(Name = "Status")]
-        public bool Finished { get; set; }
+        public TaskStatus Status { get; set; }
 
         [Display(Name = "Priorytet")]
         public TaskPriority Priority { get; set; }
