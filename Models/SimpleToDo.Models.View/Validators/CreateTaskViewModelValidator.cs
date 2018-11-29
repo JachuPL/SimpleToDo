@@ -31,7 +31,7 @@ namespace SimpleToDo.Models.View.Validators
 
         private bool BeAValidValue(TaskStatus parsedStatus)
         {
-            return TaskStatus.Finished <= parsedStatus && parsedStatus <= TaskStatus.Unfinished;
+            return TaskStatus.Unfinished <= parsedStatus && parsedStatus <= TaskStatus.Finished;
         }
 
         private bool BeAValidValue(TaskPriority parsedPriority)

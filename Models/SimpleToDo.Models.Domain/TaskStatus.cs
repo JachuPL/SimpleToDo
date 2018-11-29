@@ -2,7 +2,7 @@
 {
     public enum TaskStatus
     {
-        Finished,
-        Unfinished
+        Unfinished = 0,
+        Finished = 1
     }
 }
