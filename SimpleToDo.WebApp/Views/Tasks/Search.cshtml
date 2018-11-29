@@ -1,4 +1,5 @@
 ﻿@using SimpleToDo.WebApp.Controllers
+@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
 @model SearchResultsViewModel
 
 @await Html.PartialAsync("SearchBox", new SearchCriteriaViewModel())
@@ -6,7 +7,7 @@
 @if (Model.Results.Any())
 {
     <h4>Wyniki wyszukiwania dla frazy '@Model.Phrase'</h4>
-    <br/>
+    <br />
     <table class="table">
         <thead class="thead-default">
             <tr>
@@ -22,7 +23,7 @@
                 <tr class="@task.GetClassByPriority()">
                     <td class="text-center">@task.Title</td>
                     <td class="text-center">
-                        <input @(task.Status ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
+                        <input @(task.Status == TaskStatus.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
                     </td>
                     <td class="text-center">@task.DueDate</td>
                     <td class="text-center">

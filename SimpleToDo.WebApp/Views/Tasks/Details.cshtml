@@ -1,11 +1,12 @@
-﻿@model TaskDetailsViewModel
+﻿@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
+@model TaskDetailsViewModel
 
 <h2>@Model.Title</h2>
 
 <div>
     <div class="row">
         <div class="col-md-2">
-            <input type="checkbox" disabled asp-for="Status" data-toggle="toggle" value="@Model.Status" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" data-offstyle="primary" />
+            <input @(Model.Status == TaskStatus.Finished ? "checked" : "") type="checkbox" disabled data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" data-offstyle="primary" />
         </div>
         <div class="col-md-3">
             <span class="fa fa-calendar"></span>&nbsp;@Html.DisplayFor(model => model.DueDate)
