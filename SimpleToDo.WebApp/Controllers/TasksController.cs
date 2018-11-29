@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using X.PagedList;
-using TaskStatus = SimpleToDo.Models.View.TaskStatus;
+using TaskStatus = SimpleToDo.Models.Domain.TaskStatus;
 
 namespace SimpleToDo.WebApp.Controllers
 {

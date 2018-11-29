@@ -1,8 +1,7 @@
-﻿namespace SimpleToDo.Models.View
+﻿namespace SimpleToDo.Models.Domain
 {
     public enum TaskStatus
     {
-        All,
         Finished,
         Unfinished
     }

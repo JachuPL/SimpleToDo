@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-using TaskStatus = SimpleToDo.Models.View.TaskStatus;
+using TaskStatus = SimpleToDo.Models.Domain.TaskStatus;
 
 namespace SimpleToDo.Services
 {
@@ -27,18 +27,18 @@ namespace SimpleToDo.Services
             switch (filteredStatus)
             {
                 case TaskStatus.Finished:
-                    query = query.Where(x => x.Finished);
+                    query = query.Where(x => x.Status);
                     break;
 
                 case TaskStatus.Unfinished:
-                    query = query.Where(x => !x.Finished);
+                    query = query.Where(x => !x.Status);
                     break;
 
                 case TaskStatus.All:
                 default:
                     break;
             }
-            return query.OrderBy(x => x.Finished)
+            return query.OrderBy(x => x.Status)
                 .ThenByDescending(x => x.Priority)
                 .ToPagedListAsync(page, tasksPerPage);
         }
@@ -63,7 +63,7 @@ namespace SimpleToDo.Services
 
             task.Title = model.Title;
             task.Description = model.Description;
-            task.Finished = model.Finished;
+            task.Status = model.Status;
             task.DueDate = model.DueDate;
             task.Priority = model.Priority;
 

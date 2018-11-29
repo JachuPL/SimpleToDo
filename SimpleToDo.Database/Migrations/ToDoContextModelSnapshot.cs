@@ -30,7 +30,7 @@ namespace SimpleToDo.Database.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<bool>("Finished");
+                    b.Property<bool>("Status");
 
                     b.Property<int>("Priority");
 

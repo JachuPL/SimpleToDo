@@ -1,7 +1,7 @@
 ﻿@using SimpleToDo.WebApp.Controllers
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
-@using TaskStatus = SimpleToDo.Models.View.TaskStatus
+@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
 @model TaskIndexViewModel
 
 <div class="pad-bottom">
@@ -11,8 +11,7 @@
     <a asp-action="Search" class="btn btn-light">
         <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
     </a>
-    <form asp-route-page="@Model.Tasks.PageNumber"
-          method="post">
+    <form asp-route-page="@Model.Tasks.PageNumber" method="post">
         <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<TaskStatus>()" class="form-control"></select>
         <button type="submit">
             Filtruj

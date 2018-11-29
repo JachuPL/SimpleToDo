@@ -1,4 +1,5 @@
-﻿using X.PagedList;
+﻿using SimpleToDo.Models.Domain;
+using X.PagedList;
 
 namespace SimpleToDo.Models.View
 {
