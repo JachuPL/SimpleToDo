@@ -22,7 +22,7 @@ namespace SimpleToDo.Services
 
         public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, FilteredTaskStatus filteredStatus)
         {
-            IQueryable<ToDoTask> query = _ctx.Tasks;
+            IQueryable<ToDoTask> query = _ctx.Tasks.AsNoTracking();
 
             if (filteredStatus != FilteredTaskStatus.All)
                 query = query.Where(x => x.Status == filteredStatus.ToTaskStatus());
@@ -63,7 +63,7 @@ namespace SimpleToDo.Services
 
         public async Task<List<ToDoTask>> FindMatchingTitlesOrDescriptions(string criteria)
         {
-            return await _ctx.Tasks.Where(x => x.Title.Contains(criteria) || x.Description.Contains(criteria)).ToListAsync();
+            return await _ctx.Tasks.AsNoTracking().Where(x => x.Title.Contains(criteria) || x.Description.Contains(criteria)).ToListAsync();
         }
     }
 }
