@@ -31,10 +31,13 @@
 
 @await Html.PartialAsync("TaskIndexTable", Model.Tasks)
 
-<br />
-@Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new { page }), new PagedListRenderOptionsBase
+@if (Model.Tasks?.Any() == true)
 {
-    ContainerDivClasses = new[] { "navigation" },
-    LiElementClasses = new[] { "page-item" },
-    PageClasses = new[] { "page-link" },
-})
+    <br />
+    @Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new {page}), new PagedListRenderOptionsBase
+    {
+        ContainerDivClasses = new[] {"navigation"},
+        LiElementClasses = new[] {"page-item"},
+        PageClasses = new[] {"page-link"},
+    })
+}
