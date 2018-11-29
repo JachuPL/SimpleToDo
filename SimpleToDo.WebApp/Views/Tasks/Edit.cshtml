@@ -1,4 +1,5 @@
-﻿@model EditTaskViewModel
+﻿@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
+@model EditTaskViewModel
 @section Scripts {
     <script type="text/javascript">
         $(function () {
@@ -40,9 +41,9 @@
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <label>
-                    @Html.DisplayNameFor(model => model.Finished) <input asp-for="Finished" data-toggle="toggle" value="true" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
-                </label>
+                <label asp-for="Status" class="col-form-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<TaskStatus>()" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <label asp-for="Priority" class="col-form-label"></label>

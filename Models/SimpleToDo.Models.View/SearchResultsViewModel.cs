@@ -4,7 +4,7 @@ namespace SimpleToDo.Models.View
 {
     public class SearchResultsViewModel
     {
-        public List<TaskIndexViewModel> Results { get; set; } = new List<TaskIndexViewModel>();
+        public List<TaskListElementViewModel> Results { get; set; } = new List<TaskListElementViewModel>();
         public string Phrase { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace SimpleToDo.Database.Configurations
 
             builder.Property(x => x.Title).HasMaxLength(100).IsRequired().IsUnicode();
             builder.Property(x => x.Description).IsRequired(false).IsUnicode();
-            builder.Property(x => x.Finished);
+            builder.Property(x => x.Status);
             builder.Property(x => x.Priority);
             builder.Property(x => x.DueDate).HasColumnType("DATETIME2").IsRequired();
         }

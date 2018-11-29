@@ -21,11 +21,16 @@ namespace SimpleToDo.WebApp.Controllers
             _mapper = mapper;
         }
 
-        // GET: Tasks?page=1
-        public async Task<IActionResult> Index([FromQuery]int page = 1)
+        // GET: Tasks?page=1&status=All
+        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]FilteredTaskStatus status = FilteredTaskStatus.All)
         {
-            IPagedList<ToDoTask> tasks = await _taskService.GetPage(page, 10);
-            return View(ToMappedPagedList<ToDoTask, TaskIndexViewModel>(tasks));
+            IPagedList<ToDoTask> tasks = await _taskService.GetPage(page, 10, status);
+            TaskIndexViewModel viewModel = new TaskIndexViewModel()
+            {
+                Tasks = ToMappedPagedList<ToDoTask, TaskListElementViewModel>(tasks),
+                FilteredStatus = status
+            };
+            return View(viewModel);
         }
 
         private IPagedList<TDestination> ToMappedPagedList<TSource, TDestination>(IPagedList<TSource> list)
@@ -33,6 +38,13 @@ namespace SimpleToDo.WebApp.Controllers
             IEnumerable<TDestination> sourceList = _mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(list);
             IPagedList<TDestination> pagedResult = new StaticPagedList<TDestination>(sourceList, list.GetMetaData());
             return pagedResult;
+        }
+
+        // POST: Tasks?page=1&status=All
+        [HttpPost]
+        public IActionResult Index(TaskIndexViewModel model, [FromQuery]int page)
+        {
+            return RedirectToAction(nameof(Index), new { page = page, status = model.FilteredStatus });
         }
 
         // GET: Tasks/{id:guid}
@@ -127,7 +139,7 @@ namespace SimpleToDo.WebApp.Controllers
             SearchResultsViewModel resultsModel = new SearchResultsViewModel()
             {
                 Phrase = model.Phrase,
-                Results = _mapper.Map<List<TaskIndexViewModel>>(searchResults)
+                Results = _mapper.Map<List<TaskListElementViewModel>>(searchResults)
             };
             return View(nameof(Search), resultsModel);
         }

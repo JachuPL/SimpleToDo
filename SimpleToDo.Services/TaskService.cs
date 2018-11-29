@@ -20,10 +20,14 @@ namespace SimpleToDo.Services
             _ctx = context;
         }
 
-        public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage)
+        public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, FilteredTaskStatus filteredStatus)
         {
-            return _ctx.Tasks
-                .OrderBy(x => x.Finished)
+            IQueryable<ToDoTask> query = _ctx.Tasks;
+
+            if (filteredStatus != FilteredTaskStatus.All)
+                query = query.Where(x => x.Status == filteredStatus.ToTaskStatus());
+
+            return query.OrderBy(x => x.Status)
                 .ThenByDescending(x => x.Priority)
                 .ToPagedListAsync(page, tasksPerPage);
         }
@@ -48,7 +52,7 @@ namespace SimpleToDo.Services
 
             task.Title = model.Title;
             task.Description = model.Description;
-            task.Finished = model.Finished;
+            task.Status = model.Status;
             task.DueDate = model.DueDate;
             task.Priority = model.Priority;
 

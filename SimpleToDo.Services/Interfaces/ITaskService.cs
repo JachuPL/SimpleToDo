@@ -9,7 +9,7 @@ namespace SimpleToDo.Services.Interfaces
 {
     public interface ITaskService
     {
-        Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage);
+        Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, FilteredTaskStatus filteredStatus);
 
         Task<ToDoTask> Get(Guid id);
 

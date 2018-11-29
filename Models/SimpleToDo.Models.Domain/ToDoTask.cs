@@ -9,7 +9,7 @@ namespace SimpleToDo.Models.Domain
             Title = title;
             Description = description;
             DueDate = dueDate;
-            Finished = false;
+            Status = TaskStatus.Finished;
             Priority = priority;
         }
 
@@ -17,7 +17,7 @@ namespace SimpleToDo.Models.Domain
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
-        public bool Finished { get; set; }
+        public TaskStatus Status { get; set; }
         public TaskPriority Priority { get; set; }
     }
 }
