@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (TaskIndexViewModel task in Model.Results)
+            @foreach (TaskListElementViewModel task in Model.Results)
             {
                 <tr class="@task.GetClassByPriority()">
                     <td class="text-center">@task.Title</td>

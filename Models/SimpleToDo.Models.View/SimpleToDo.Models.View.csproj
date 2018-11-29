@@ -12,4 +12,10 @@
     <ProjectReference Include="..\SimpleToDo.Models.Domain\SimpleToDo.Models.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="X.PagedList">
+      <HintPath>..\..\..\..\.nuget\packages\x.pagedlist\7.6.0\lib\netstandard2.0\X.PagedList.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

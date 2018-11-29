@@ -1,7 +1,8 @@
 ﻿@using SimpleToDo.WebApp.Controllers
 @using X.PagedList.Mvc.Common
 @using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<TaskIndexViewModel>
+@using TaskStatus = SimpleToDo.Models.View.TaskStatus
+@model TaskIndexViewModel
 
 <div class="pad-bottom">
     <a asp-action="Create" class="btn btn-success">
@@ -10,6 +11,13 @@
     <a asp-action="Search" class="btn btn-light">
         <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
     </a>
+    <form asp-route-page="@Model.Tasks.PageNumber"
+          method="post">
+        <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<TaskStatus>()" class="form-control"></select>
+        <button type="submit">
+            Filtruj
+        </button>
+    </form>
 </div>
 
 <table class="table">
@@ -22,12 +30,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (TaskIndexViewModel task in Model)
+        @foreach (TaskListElementViewModel task in Model.Tasks)
         {
             <tr class="@task.GetClassByPriority()">
                 <td class="text-center">@task.Title</td>
                 <td class="text-center">
-                    <input disabled @(task.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success"/>
+                    <input disabled @(task.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
                 </td>
                 <td class="text-center">@task.DueDate</td>
                 <td class="text-center">
@@ -40,7 +48,7 @@
     </tbody>
 </table>
 <br />
-@Html.PagedListPager(Model, page => Url.Action(nameof(TasksController.Index), new { page }), new PagedListRenderOptionsBase
+@Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new { page }), new PagedListRenderOptionsBase
 {
     ContainerDivClasses = new[] { "navigation" },
     LiElementClasses = new[] { "page-item" },
