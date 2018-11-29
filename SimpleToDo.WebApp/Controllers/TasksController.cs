@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using X.PagedList;
-using TaskStatus = SimpleToDo.Models.View.TaskStatus;
 
 namespace SimpleToDo.WebApp.Controllers
 {
@@ -23,7 +22,7 @@ namespace SimpleToDo.WebApp.Controllers
         }
 
         // GET: Tasks?page=1&status=All
-        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]TaskStatus status = TaskStatus.All)
+        public async Task<IActionResult> Index([FromQuery]int page = 1, [FromQuery]FilteredTaskStatus status = FilteredTaskStatus.All)
         {
             IPagedList<ToDoTask> tasks = await _taskService.GetPage(page, 10, status);
             TaskIndexViewModel viewModel = new TaskIndexViewModel()

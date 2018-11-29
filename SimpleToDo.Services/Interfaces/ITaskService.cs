@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using X.PagedList;
-using TaskStatus = SimpleToDo.Models.View.TaskStatus;
 
 namespace SimpleToDo.Services.Interfaces
 {
     public interface ITaskService
     {
-        Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, TaskStatus filteredStatus);
+        Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, FilteredTaskStatus filteredStatus);
 
         Task<ToDoTask> Get(Guid id);
 

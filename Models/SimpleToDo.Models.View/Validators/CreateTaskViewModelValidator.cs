@@ -22,6 +22,16 @@ namespace SimpleToDo.Models.View.Validators
                 .Must(BeAValidValue)
                 .WithMessage(
                     "Wartościami dozwolonymi dla priorytetu zadania są \"Normalny\", \"Wysoki\" oraz \"Krytyczny\".");
+
+            RuleFor(x => x.Status)
+                .Must(BeAValidValue)
+                .WithMessage(
+                    "Wartościami dozwolonymi dla statusu zadania są \"Nieukończone\" oraz \"Ukończone\".");
+        }
+
+        private bool BeAValidValue(TaskStatus parsedStatus)
+        {
+            return TaskStatus.Unfinished <= parsedStatus && parsedStatus <= TaskStatus.Finished;
         }
 
         private bool BeAValidValue(TaskPriority parsedPriority)

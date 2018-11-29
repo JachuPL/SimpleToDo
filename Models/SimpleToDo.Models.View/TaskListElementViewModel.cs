@@ -13,7 +13,7 @@ namespace SimpleToDo.Models.View
         public string Title { get; set; }
 
         [Display(Name = "Status")]
-        public bool Finished { get; set; }
+        public TaskStatus Status { get; set; }
 
         [Display(Name = "Przewid. termin zakończenia")]
         public DateTime DueDate { get; set; }
