@@ -15,7 +15,7 @@ namespace SimpleToDo.Database.Migrations
                     Title = table.Column<string>(maxLength: 100, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     DueDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    Finished = table.Column<bool>(nullable: false),
+                    Status = table.Column<bool>(nullable: false),
                     Priority = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
