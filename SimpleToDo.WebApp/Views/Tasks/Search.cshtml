@@ -7,7 +7,6 @@
 
 @if (Model.Results.Any())
 {
-    <h4>Wyniki wyszukiwania dla frazy '@Model.Phrase'</h4>
     <br />
     @await Html.PartialAsync("TaskIndexTable", Model.Results)
 }

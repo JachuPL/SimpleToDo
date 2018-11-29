@@ -4,7 +4,7 @@
     <form asp-action="Search" method="post">
         @Html.AntiForgeryToken()
         <div class="input-group">
-            <input type="text" asp-for="Phrase" class="form-control" />
+            <input type="text" asp-for="Phrase" class="form-control" placeholder="Fraza do wyszukania w tytule lub opisie"/>
             <div class="input-group-append">
                 <button type="submit" class="btn btn-light">
                     <span class="fa fa-search"></span>
