@@ -15,7 +15,7 @@ namespace SimpleToDo.Services.Interfaces
 
         Task<ToDoTask> Create(ToDoTask toDoTask);
 
-        Task<ToDoTask> Update(Guid id, EditTaskViewModel model);
+        Task<ToDoTask> Update(ToDoTask task);
 
         Task Delete(Guid id);
 

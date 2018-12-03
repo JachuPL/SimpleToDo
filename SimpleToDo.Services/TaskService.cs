@@ -22,7 +22,7 @@ namespace SimpleToDo.Services
 
         public Task<IPagedList<ToDoTask>> GetPage(int page, int tasksPerPage, FilteredTaskStatus filteredStatus)
         {
-            IQueryable<ToDoTask> query = _ctx.Tasks;
+            IQueryable<ToDoTask> query = _ctx.Tasks.AsNoTracking();
 
             if (filteredStatus != FilteredTaskStatus.All)
                 query = query.Where(x => x.Status == filteredStatus.ToTaskStatus());
@@ -44,18 +44,8 @@ namespace SimpleToDo.Services
             return toDoTask;
         }
 
-        public async Task<ToDoTask> Update(Guid id, EditTaskViewModel model)
+        public async Task<ToDoTask> Update(ToDoTask task)
         {
-            ToDoTask task = await Get(id);
-            if (task is null)
-                return null;
-
-            task.Title = model.Title;
-            task.Description = model.Description;
-            task.Status = model.Status;
-            task.DueDate = model.DueDate;
-            task.Priority = model.Priority;
-
             _ctx.Tasks.Update(task);
             await _ctx.SaveChangesAsync();
             return task;
@@ -73,7 +63,7 @@ namespace SimpleToDo.Services
 
         public async Task<List<ToDoTask>> FindMatchingTitlesOrDescriptions(string criteria)
         {
-            return await _ctx.Tasks.Where(x => x.Title.Contains(criteria) || x.Description.Contains(criteria)).ToListAsync();
+            return await _ctx.Tasks.AsNoTracking().Where(x => x.Title.Contains(criteria) || x.Description.Contains(criteria)).ToListAsync();
         }
     }
 }

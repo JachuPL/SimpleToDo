@@ -11,51 +11,33 @@
                 <span class="fa fa-calendar-plus"></span>&nbsp;Nowe zadanie
             </a>
         </div>
-        <div class="col-2">
-            <a asp-action="Search" class="btn btn-light">
-                <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
-            </a>
-        </div>
-        <div class="col-6">
-            <form asp-route-page="@Model.Tasks.PageNumber" method="post" class="form-inline">
-                <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<FilteredTaskStatus>()" class="form-control mr-2"></select>
-                <button type="submit" class="btn btn-light">Filtruj</button>
-            </form>
-        </div>
+
+        @if (Model.Tasks?.Any() == true)
+        {
+            <div class="col-2">
+                <a asp-action="Search" class="btn btn-light">
+                    <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
+                </a>
+            </div>
+            <div class="col-6">
+                <form asp-route-page="@Model.Tasks.PageNumber" method="post" class="form-inline">
+                    <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<FilteredTaskStatus>()" class="form-control mr-2"></select>
+                    <button type="submit" class="btn btn-light">Filtruj</button>
+                </form>
+            </div>
+        }
     </div>
 </div>
 
-<table class="table">
-    <thead class="thead-default">
-        <tr>
-            <th class="text-center">Tytuł</th>
-            <th class="text-center">Status</th>
-            <th class="text-center">Przewidywana data zakończenia</th>
-            <th class="text-center"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (TaskListElementViewModel task in Model.Tasks)
-        {
-            <tr class="@task.GetClassByPriority()">
-                <td class="text-center">@task.Title</td>
-                <td class="text-center">
-                    <input disabled @(task.Status == TaskStatus.Finished ? "checked" : "") type="checkbox" data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" />
-                </td>
-                <td class="text-center">@task.DueDate</td>
-                <td class="text-center">
-                    <a href="@Url.Action(nameof(TasksController.Details), "Tasks", new { id = task.Id })" class="btn btn-light">
-                        <span class="fa fa-info"></span>&nbsp;Szczegóły
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<br />
-@Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new { page }), new PagedListRenderOptionsBase
+@await Html.PartialAsync("TaskIndexTable", Model.Tasks)
+
+@if (Model.Tasks?.Any() == true)
 {
-    ContainerDivClasses = new[] { "navigation" },
-    LiElementClasses = new[] { "page-item" },
-    PageClasses = new[] { "page-link" },
-})
+    <br />
+    @Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new {page}), new PagedListRenderOptionsBase
+    {
+        ContainerDivClasses = new[] {"navigation"},
+        LiElementClasses = new[] {"page-item"},
+        PageClasses = new[] {"page-link"},
+    })
+}
