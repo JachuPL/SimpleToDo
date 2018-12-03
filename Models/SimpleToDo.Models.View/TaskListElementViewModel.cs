@@ -19,7 +19,6 @@ namespace SimpleToDo.Models.View
         public DateTime DueDate { get; set; }
 
         [Display(Name = "Priorytet")]
-        // TODO: check if after mapping sort order is lost, if so then leave this field intact
         public TaskPriority Priority { get; set; }
 
         public string GetClassByPriority()
