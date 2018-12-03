@@ -1,0 +1,57 @@
+﻿@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
+@model TaskDetailsViewModel
+
+<h2>@Model.Title</h2>
+
+<div>
+    <div class="row">
+        <div class="col-md-2">
+            <input @(Model.Status == TaskStatus.Finished ? "checked" : "") type="checkbox" disabled data-toggle="toggle" data-on="Ukończone" data-off="Nieukończone" data-onstyle="success" data-offstyle="primary" />
+        </div>
+        <div class="col-md-3">
+            <span class="fa fa-calendar"></span>&nbsp;@Html.DisplayFor(model => model.DueDate)
+        </div>
+        <div class="col-md-2">
+            <span class="fa fa-bolt"></span>&nbsp;@Html.DisplayFor(model => model.Priority)
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+    <p class="keep-whitespaces">
+        @Html.DisplayFor(model => model.Description)
+    </p>
+    <div>
+        <a asp-action="Index" class="btn btn-light mr-2">
+            <span class="fa fa-chevron-left"></span>&nbsp;Powrót do listy zadań
+        </a>
+        <a href="@Url.Action("Edit", "Tasks", new { id = Model.Id })" class="btn btn-light mr-2">
+            <span class="fa fa-edit"></span>&nbsp;Edytuj
+        </a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTaskModal">
+            <span class="fa fa-trash-alt"></span>&nbsp;Usuń
+        </button>
+    </div>
+</div>
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteTaskModalLabel">Czy na pewno chcesz usunąć zadanie '@Model.Title'?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Zamknij">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Wybrano opcję, która prowadzi do nieodwracalnej operacji usunięcia zadania '@Model.Title'. Po usunięciu zadania jego przywrócenie będzie niemożliwe. Czy chcesz kontynuować?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                <form method="post" asp-action="Delete">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="deleteTaskModal">
+                        <span class="fa fa-trash-alt"></span>&nbsp;Usuń
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

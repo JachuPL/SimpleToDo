@@ -1,0 +1,16 @@
+﻿@using SimpleToDo.WebApp.Controllers
+@using X.PagedList
+@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
+@model SearchResultsViewModel
+
+@await Html.PartialAsync("SearchBox", new SearchCriteriaViewModel())
+
+@if (Model.Results.Any())
+{
+    <br />
+    @await Html.PartialAsync("TaskIndexTable", Model.Results)
+}
+else
+{
+    <p>Wpisz szukaną frazę w pole tekstowe i następnie kliknij lupę, by wyszukać ją w tytułach i opisach zadań.</p>
+}

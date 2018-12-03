@@ -1,0 +1,43 @@
+﻿@using SimpleToDo.WebApp.Controllers
+@using X.PagedList.Mvc.Common
+@using X.PagedList.Mvc.Core
+@using TaskStatus = SimpleToDo.Models.Domain.TaskStatus
+@model TaskIndexViewModel
+
+<div class="pad-bottom">
+    <div class="form-row align-items-center">
+        <div class="col-2">
+            <a asp-action="Create" class="btn btn-success">
+                <span class="fa fa-calendar-plus"></span>&nbsp;Nowe zadanie
+            </a>
+        </div>
+
+        @if (Model.Tasks?.Any() == true)
+        {
+            <div class="col-2">
+                <a asp-action="Search" class="btn btn-light">
+                    <span class="fa fa-search"></span>&nbsp;Wyszukiwanie
+                </a>
+            </div>
+            <div class="col-6">
+                <form asp-route-page="@Model.Tasks.PageNumber" method="post" class="form-inline">
+                    <select asp-for="FilteredStatus" asp-items="Html.GetEnumSelectList<FilteredTaskStatus>()" class="form-control mr-2"></select>
+                    <button type="submit" class="btn btn-light">Filtruj</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+@await Html.PartialAsync("TaskIndexTable", Model.Tasks)
+
+@if (Model.Tasks?.Any() == true)
+{
+    <br />
+    @Html.PagedListPager(Model.Tasks, page => Url.Action(nameof(TasksController.Index), new {page}), new PagedListRenderOptionsBase
+    {
+        ContainerDivClasses = new[] {"navigation"},
+        LiElementClasses = new[] {"page-item"},
+        PageClasses = new[] {"page-link"},
+    })
+}

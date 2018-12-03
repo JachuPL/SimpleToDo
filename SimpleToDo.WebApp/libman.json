@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.1.3",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.3.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery-validate@1.18.0",
+      "destination": "wwwroot/lib/jquery-validate/",
+      "files": [
+        "jquery.validate.min.js",
+        "localization/messages_pl.js",
+        "localization/messages_pl.min.js",
+        "additional-methods.js",
+        "additional-methods.min.js",
+        "jquery.validate.js"
+      ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "files": [
+        "jquery.validate.unobtrusive.min.js",
+        "jquery.validate.unobtrusive.js"
+      ]
+    },
+    {
+      "library": "bootstrap-toggle@2.2.2",
+      "destination": "wwwroot/lib/bootstrap-toggle/",
+      "files": [
+        "css/bootstrap-toggle.css",
+        "css/bootstrap-toggle.min.css",
+        "css/bootstrap2-toggle.css",
+        "css/bootstrap2-toggle.min.css",
+        "js/bootstrap-toggle.js",
+        "js/bootstrap-toggle.min.js",
+        "js/bootstrap-toggle.min.js.map",
+        "js/bootstrap2-toggle.js",
+        "js/bootstrap2-toggle.min.js",
+        "js/bootstrap2-toggle.min.js.map"
+      ]
+    },
+    {
+      "library": "tempusdominus-bootstrap-4@5.1.2",
+      "destination": "wwwroot/lib/tempusdominus-bootstrap-4/"
+    },
+    {
+      "library": "moment.js@2.22.2",
+      "destination": "wwwroot/lib/moment.js/",
+      "files": [
+        "moment.min.js",
+        "moment-with-locales.js",
+        "moment-with-locales.min.js",
+        "moment.js",
+        "locale/pl.js"
+      ]
+    }
+  ]
+}
